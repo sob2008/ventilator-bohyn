@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ventilator PRO - Uzivatelsky manual</title>
+<style>
+@page {
+  size: A4;
+  margin: 20mm 18mm 25mm 18mm;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Liberation Sans', 'Arial', sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #222;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm 18mm;
+}
+
+/* ---- Titulni strana ---- */
+.cover {
+  text-align: center;
+  page-break-after: always;
+  padding-top: 40mm;
+}
+.cover .brand {
+  font-size: 14pt;
+  letter-spacing: 3px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 15mm;
+}
+.cover .product {
+  font-size: 32pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 5mm;
+}
+.cover .subtitle {
+  font-size: 16pt;
+  color: #555;
+  margin-bottom: 25mm;
+}
+.cover .meta-table {
+  display: inline-block;
+  text-align: left;
+  border-top: 2px solid #1a1a2e;
+  border-bottom: 2px solid #1a1a2e;
+  padding: 5mm 10mm;
+  margin-bottom: 20mm;
+}
+.cover .meta-table td {
+  padding: 1mm 5mm;
+  font-size: 10pt;
+}
+.cover .meta-table td:first-child {
+  color: #888;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 8pt;
+  letter-spacing: 1px;
+  padding-right: 10mm;
+}
+.cover .footer-note {
+  position: relative;
+  margin-top: 30mm;
+  font-size: 9pt;
+  color: #aaa;
+}
+
+/* ---- Obsah ---- */
+.toc {
+  page-break-after: always;
+}
+.toc h2 {
+  font-size: 18pt;
+  color: #1a1a2e;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 3mm;
+  margin-bottom: 8mm;
+}
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  padding-left: 0;
+}
+.toc ol li {
+  counter-increment: toc;
+  padding: 2mm 0;
+  border-bottom: 1px dotted #ccc;
+  font-size: 11pt;
+}
+.toc ol li::before {
+  content: counter(toc) ".";
+  display: inline-block;
+  width: 8mm;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* ---- Nadpisy ---- */
+h1 {
+  font-size: 18pt;
+  color: #1a1a2e;
+  border-bottom: 2px solid #e94560;
+  padding-bottom: 2mm;
+  margin-top: 10mm;
+  margin-bottom: 6mm;
+  page-break-after: avoid;
+}
+h2 {
+  font-size: 13pt;
+  color: #1a1a2e;
+  margin-top: 8mm;
+  margin-bottom: 4mm;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 11pt;
+  color: #444;
+  margin-top: 5mm;
+  margin-bottom: 2mm;
+}
+
+/* ---- Odstavce ---- */
+p {
+  margin-bottom: 3mm;
+  text-align: justify;
+}
+
+/* ---- Tabulky ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4mm 0 6mm 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 2.5mm 4mm;
+  text-align: left;
+  font-weight: 700;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+td {
+  padding: 2mm 4mm;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: #f8f8f8;
+}
+
+/* ---- Seznamy ---- */
+ul, ol {
+  margin: 2mm 0 4mm 6mm;
+  padding-left: 4mm;
+}
+li {
+  margin-bottom: 1.5mm;
+}
+
+/* ---- Boxy ---- */
+.info-box {
+  background: #eef6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+.warn-box {
+  background: #fef9ee;
+  border-left: 4px solid #f0a500;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+.danger-box {
+  background: #fef2f2;
+  border-left: 4px solid #e94560;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+.box-title {
+  font-weight: 700;
+  margin-bottom: 1mm;
+}
+
+/* ---- Kroky ---- */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding-left: 0;
+}
+.steps li {
+  counter-increment: step;
+  padding: 2mm 0 2mm 10mm;
+  position: relative;
+  margin-bottom: 2mm;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 1.5mm;
+  width: 6mm;
+  height: 6mm;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 9pt;
+  font-weight: 700;
+  line-height: 6mm;
+}
+
+/* ---- Schema priority ---- */
+.priority {
+  text-align: center;
+  font-size: 12pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 5mm 0;
+  padding: 4mm;
+  background: #f0f0f0;
+  border-radius: 3mm;
+}
+.priority .arrow { color: #e94560; margin: 0 3mm; }
+
+/* ---- Indikator barev ---- */
+.color-dot {
+  display: inline-block;
+  width: 3mm;
+  height: 3mm;
+  border-radius: 50%;
+  margin-right: 1.5mm;
+  vertical-align: middle;
+}
+.dot-green { background: #4ecca3; }
+.dot-yellow { background: #f0a500; }
+.dot-red { background: #e94560; }
+.dot-gray { background: #999; }
+
+/* ---- Stranka ---- */
+.page-break {
+  page-break-before: always;
+}
+
+/* ---- Paticka ---- */
+.doc-footer {
+  margin-top: 15mm;
+  padding-top: 4mm;
+  border-top: 1px solid #ccc;
+  font-size: 8pt;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ---- Mobilni zobrazeni ---- */
+@media (max-width: 600px) {
+  body {
+    max-width: 100%;
+    padding: 5mm 4mm;
+    font-size: 10pt;
+  }
+  .cover { padding-top: 15mm; }
+  .cover .product { font-size: 22pt; }
+  .cover .subtitle { font-size: 13pt; margin-bottom: 10mm; }
+  .cover .brand { font-size: 11pt; margin-bottom: 8mm; }
+  .cover .meta-table { padding: 3mm 5mm; }
+  .cover .meta-table td { font-size: 9pt; padding: 1mm 2mm; }
+  .cover .meta-table td:first-child { padding-right: 4mm; }
+  .cover .footer-note { margin-top: 15mm; }
+  h1 { font-size: 15pt; margin-top: 6mm; }
+  h2 { font-size: 12pt; }
+  .toc h2 { font-size: 15pt; }
+  table { font-size: 9pt; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  th, td { padding: 2mm 2.5mm; }
+  th { font-size: 8pt; }
+  .priority { font-size: 10pt; padding: 3mm; }
+  .info-box, .warn-box, .danger-box { padding: 3mm 4mm; font-size: 9pt; }
+  .steps li { padding-left: 9mm; }
+  ul, ol { margin-left: 3mm; padding-left: 3mm; }
+}
+
+/* ---- Tisk ---- */
+@media print {
+  body { padding: 0; max-width: 210mm; }
+  .page-break { page-break-before: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======== TITULNI STRANA ======== -->
+<div class="cover">
+  <div class="brand">SOB electronic</div>
+  <div class="product">Ventilator PRO</div>
+  <div class="subtitle">Uzivatelsky manual</div>
+  <table class="meta-table">
+    <tr><td>Verze</td><td>1.1</td></tr>
+    <tr><td>Datum</td><td>Unor 2026</td></tr>
+    <tr><td>Vyrobce</td><td>SOB electronic</td></tr>
+    <tr><td>Firmware</td><td>ventilator-pro</td></tr>
+  </table>
+  <div class="footer-note">
+    &copy; 2026 SOB electronic. Vsechna prava vyhrazena.<br>
+    Tento dokument je soucasti dodavky vyrobku. Uschovejte pro budouci pouziti.
+  </div>
+</div>
+
+<!-- ======== OBSAH ======== -->
+<div class="toc">
+  <h2>Obsah</h2>
+  <ol>
+    <li>Uvod</li>
+    <li>Bezpecnostni pokyny</li>
+    <li>Prvni spusteni a pripojeni k WiFi</li>
+    <li>Pristup k webovemu rozhrani</li>
+    <li>Rezimy provozu</li>
+    <li>Popis weboveho rozhrani</li>
+    <li>Nastaveni teplotnich prahu</li>
+    <li>Graf teploty</li>
+    <li>Systemovy monitoring</li>
+    <li>Reseni problemu</li>
+    <li>Technicka specifikace</li>
+    <li>Podpora</li>
+  </ol>
+</div>
+
+<!-- ======== 1. UVOD ======== -->
+<h1>1. Uvod</h1>
+
+<p>
+  Dekujeme, ze jste si zvolili produkt <strong>Ventilator PRO</strong> od SOB electronic.
+  Toto zarizeni slouzi k automatickemu rizeni ventilatoru na zaklade teploty v mistnosti.
+</p>
+
+<p>Zarizeni nabizi tri zpusoby ovladani:</p>
+
+<table>
+  <tr><th>Rezim</th><th>Popis</th></tr>
+  <tr><td><strong>Automaticky</strong></td><td>Ventilator se zapina a vypina podle nastavene teploty</td></tr>
+  <tr><td><strong>Manualni (web)</strong></td><td>Ventilator ovladate tlacitkem na webove strance</td></tr>
+  <tr><td><strong>Rucni (prepinac)</strong></td><td>Ventilator ovladate fyzickym prepinacem na zarizeni</td></tr>
+</table>
+
+<p>
+  Zarizeni se ovlada prostrednictvim weboveho rozhrani, ktere je pristupne
+  z jakehokoli zarizeni (telefon, tablet, pocitac) pripojeneho ke stejne WiFi siti.
+</p>
+
+<!-- ======== 2. BEZPECNOST ======== -->
+<h1>2. Bezpecnostni pokyny</h1>
+
+<div class="danger-box">
+  <div class="box-title">Dulezite bezpecnostni informace</div>
+  <ul>
+    <li>Zarizeni nepouzivejte v mokrem nebo vlhkem prostredi.</li>
+    <li>Neotvirejte kryt zarizeni. Uvnitr nejsou zadne uzivatelsky opravitelne casti.</li>
+    <li>Pouzivejte pouze dodany napajeci adapter nebo kvalitni USB zdroj s proudem alespon 1A.</li>
+    <li>Nepripojujte k rele zatez presahujici jeho jmenovite parametry.</li>
+    <li>V pripade poruchy zarizeni odpojte od napajeni a kontaktujte podporu.</li>
+  </ul>
+</div>
+
+<div class="warn-box">
+  <div class="box-title">Upozorneni</div>
+  <p>
+    Pripojeni ventilatoru k rele provadi vyrobce nebo autorizovany technik.
+    Nepokousejte se o zapojeni sami, pokud k tomu nemately pokyny od vyrobce.
+  </p>
+</div>
+
+<!-- ======== 3. PRVNI SPUSTENI ======== -->
+<h1 class="page-break">3. Prvni spusteni a pripojeni k WiFi</h1>
+
+<p>Pri prvnim zapnuti (nebo po resetu nastaveni WiFi) je nutne zarizeni pripojit k vasi domaci WiFi siti.</p>
+
+<h2>Postup pripojeni</h2>
+
+<ol class="steps">
+  <li>Pripojte zarizeni k napajeni pomoci USB kabelu.</li>
+  <li>Zarizeni vytvori vlastni WiFi sit s nazvem <strong>ESP_Config</strong>.</li>
+  <li>Na svem telefonu nebo pocitaci se pripojte k siti <strong>ESP_Config</strong>.</li>
+  <li>Automaticky se otevre konfiguracni stranka. Pokud se neotvori, zadejte do prohlizece adresu <strong>192.168.4.1</strong></li>
+  <li>Na konfiguracni strance vyberte svou domaci WiFi sit a zadejte heslo.</li>
+  <li>Kliknete na <strong>Ulozit</strong>. Zarizeni se restartuje a pripoji k vasi siti.</li>
+</ol>
+
+<div class="info-box">
+  <div class="box-title">Poznamka</div>
+  <p>
+    Konfiguracni portal se automaticky zavre po 3 minutach. Pokud nestihnete
+    zadat udaje, zarizeni se restartuje a portal se zobrazi znovu.
+    WiFi pripojeni se uklada trvale &ndash; pri dalsich zapnutich se zarizeni pripoji automaticky.
+    Pokud dojde k docasnemu vypadku WiFi, zarizeni se automaticky znovu pripoji.
+  </p>
+</div>
+
+<!-- ======== 4. PRISTUP K WEBU ======== -->
+<h1>4. Pristup k webovemu rozhrani</h1>
+
+<p>Po uspesnem pripojeni k WiFi je webove rozhrani pristupne dvema zpusoby:</p>
+
+<table>
+  <tr><th>Zpusob</th><th>Adresa</th><th>Poznamka</th></tr>
+  <tr>
+    <td><strong>Jmenem</strong></td>
+    <td>http://ventilator.local</td>
+    <td>Funguje na vetsine modernich zarizeni</td>
+  </tr>
+  <tr>
+    <td><strong>IP adresou</strong></td>
+    <td>Podle vasi site (napr. 192.168.1.xx)</td>
+    <td>IP adresu zjistite ve vasi WiFi administraci</td>
+  </tr>
+</table>
+
+<div class="info-box">
+  <div class="box-title">Tip</div>
+  <p>
+    Zadejte adresu <strong>ventilator.local</strong> do prohlizece na telefonu nebo pocitaci.
+    Zarizeni musi byt pripojeno ke stejne WiFi siti jako vase zarizeni.
+  </p>
+</div>
+
+<!-- ======== 5. REZIMY ======== -->
+<h1>5. Rezimy provozu</h1>
+
+<h2>Automaticky rezim</h2>
+<p>
+  Vychozi rezim po zapnuti. Ventilator se automaticky zapne, kdyz teplota dosahne
+  nastaveneho prahu zapnuti, a vypne se, kdyz teplota klesne pod prah vypnuti.
+  Rozdil mezi prahy (hystereze) zabranuje cyklickemu spinani.
+</p>
+
+<h2>Manualni rezim (z webu)</h2>
+<p>
+  Prepnete tlacitkem <strong>Manualni</strong> na webove strance. V tomto rezimu ventilator
+  ovladate rucne tlacitkem na webu. Teplota se dale meri a zobrazuje, ale neovlada ventilator.
+</p>
+
+<h2>Rucni rezim (prepinacem na zarizeni)</h2>
+<p>
+  Aktivuje se fyzickym prepinacem na zarizeni. V tomto rezimu se ventilator ovlada
+  druhym prepinacem. Rucni rezim ma <strong>nejvyssi prioritu</strong> &ndash;
+  kdyz je aktivni, nelze nic menit z weboveho rozhrani. Na webu se zobrazi
+  cerveny banner s informaci.
+</p>
+
+<div class="priority">
+  Rucni rezim (prepinac) <span class="arrow">&gt;</span>
+  Manualni rezim (web) <span class="arrow">&gt;</span>
+  Automaticky rezim
+</div>
+
+<div class="info-box">
+  <div class="box-title">Poznamka</div>
+  <p>Po vypnuti prepinace rucniho rezimu se zarizeni automaticky vrati do automatickeho rezimu.</p>
+</div>
+
+<!-- ======== 6. POPIS WEBU ======== -->
+<h1 class="page-break">6. Popis weboveho rozhrani</h1>
+
+<p>Webove rozhrani obsahuje 6 prehlednych karet:</p>
+
+<h2>Karta &bdquo;Teplota&ldquo;</h2>
+<p>Zobrazuje aktualni teplotu velkym cislem. Barva se meni podle rozsahu:</p>
+<table>
+  <tr><th>Barva</th><th>Vyznam</th></tr>
+  <tr><td><span class="color-dot dot-green"></span> Zelena</td><td>Teplota pod prahem vypnuti &ndash; vse v poradku</td></tr>
+  <tr><td><span class="color-dot dot-yellow"></span> Zluta</td><td>Teplota mezi prahy</td></tr>
+  <tr><td><span class="color-dot dot-red"></span> Cervena</td><td>Teplota dosahla nebo presahla prah zapnuti</td></tr>
+  <tr><td><span class="color-dot dot-gray"></span> Seda (ERR)</td><td>Chyba teplotniho cidla</td></tr>
+</table>
+<p>Ve spodni casti karty se zobrazuje minimalni a maximalni namerana teplota od posledniho zapnuti.</p>
+
+<h2>Karta &bdquo;Ventilator&ldquo;</h2>
+<p>
+  Ikona vrtule znazornuje stav ventilatoru. Kdyz ventilator bezi, vrtule se animovane toci
+  a pod ni sviti zeleny napis <strong>Zapnuty</strong>. Kdyz stoji, vrtule je seda
+  a napis je cerveny <strong>Vypnuty</strong>.
+</p>
+
+<h2>Karta &bdquo;Rezim&ldquo;</h2>
+<p>
+  Obsahuje tlacitka pro prepinani mezi automatickym a manualnim rezimem.
+  Aktivni rezim je zvyrazneny barvou. Pod tlacitky rezimu se nachazi tlacitko pro
+  zapnuti/vypnuti ventilatoru, ktere je aktivni pouze v manualnim rezimu.
+</p>
+
+<h2>Karta &bdquo;Teplotni prahy&ldquo;</h2>
+<p>
+  Zobrazuje aktualne platne prahy a umoznuje nastavit nove hodnoty.
+  Podrobne viz kapitola 7.
+</p>
+
+<h2>Karta &bdquo;Graf teploty&ldquo;</h2>
+<p>
+  Zobrazuje prubeh teploty za posledni obdobi az do 24 hodin. Podrobne viz kapitola 8.
+</p>
+
+<h2>Karta &bdquo;System&ldquo;</h2>
+<p>
+  Zobrazuje technicky stav zarizeni. Podrobne viz kapitola 9.
+</p>
+
+<h2>Paticka</h2>
+<p>
+  Ve spodni casti stranky se zobrazuje IP adresa zarizeni, sila WiFi signalu
+  a doba behu od posledniho zapnuti (uptime).
+</p>
+
+<!-- ======== 7. PRAHY ======== -->
+<h1 class="page-break">7. Nastaveni teplotnich prahu</h1>
+
+<p>
+  Teplotni prahy urcuji, pri jake teplote se ventilator v automatickem rezimu zapne a vypne.
+  Nastaveni se uklada do pameti zarizeni a <strong>prezije restart i vypnuti</strong>.
+</p>
+
+<h2>Jak zmenit prahy</h2>
+
+<ol class="steps">
+  <li>Na webove strance najdete kartu <strong>Teplotni prahy</strong>.</li>
+  <li>V horni casti karty vidite aktualne platne prahy (aktualizuji se automaticky).</li>
+  <li>Do pole <strong>Zapnout</strong> zadejte teplotu, pri ktere se ma ventilator zapnout.</li>
+  <li>Do pole <strong>Vypnout</strong> zadejte teplotu, pri ktere se ma ventilator vypnout.</li>
+  <li>Kliknete na tlacitko <strong>Ulozit</strong>.</li>
+  <li>Zobrazi se zelene potvrzeni &bdquo;Ulozeno&ldquo; nebo cervena chybova hlaska.</li>
+</ol>
+
+<h2>Pravidla pro nastaveni</h2>
+
+<ul>
+  <li>Prah vypnuti musi byt <strong>nizsi</strong> nez prah zapnuti.</li>
+  <li>Hodnoty musi byt v rozsahu <strong>0 &ndash; 80 &deg;C</strong>.</li>
+  <li>Doporuceny rozdil mezi prahy je alespon <strong>2 &deg;C</strong>.</li>
+</ul>
+
+<h2>Priklady nastaveni</h2>
+
+<table>
+  <tr><th>Zapnout pri</th><th>Vypnout pri</th><th>Pouziti</th></tr>
+  <tr><td>27 &deg;C</td><td>25 &deg;C</td><td>Standardni mistnost (vychozi nastaveni)</td></tr>
+  <tr><td>30 &deg;C</td><td>26 &deg;C</td><td>Vetsi hystereze, mene caste spinani</td></tr>
+  <tr><td>35 &deg;C</td><td>30 &deg;C</td><td>Puda, sklenik, technicka mistnost</td></tr>
+  <tr><td>22 &deg;C</td><td>20 &deg;C</td><td>Chladnejsi prostory, servrovny</td></tr>
+</table>
+
+<div class="info-box">
+  <div class="box-title">Co je hystereze?</div>
+  <p>
+    Rozdil mezi prahem zapnuti a vypnuti. Zabranuje tomu, aby se ventilator neustale
+    zapinal a vypinal, kdyz teplota kolisa kolem jedne hodnoty. Vetsi rozdil = klidnejsi provoz.
+  </p>
+</div>
+
+<!-- ======== 8. GRAF ======== -->
+<h1>8. Graf teploty</h1>
+
+<p>
+  Graf zaznamenava prubeh teploty kazdych <strong>2 minuty</strong> a uchovava
+  data za poslednich <strong>24 hodin</strong> (720 zaznamu). Starsi data se automaticky nahradi novymi.
+</p>
+
+<h2>Co graf zobrazuje</h2>
+
+<table>
+  <tr><th>Prvek</th><th>Barva</th><th>Vyznam</th></tr>
+  <tr><td>Cara teploty</td><td><span class="color-dot dot-yellow"></span> Oranzova</td><td>Prubeh teploty v case</td></tr>
+  <tr><td>Prah zapnuti</td><td><span class="color-dot dot-red"></span> Cervena prerusovana</td><td>Teplota, pri ktere se ventilator zapne</td></tr>
+  <tr><td>Prah vypnuti</td><td><span class="color-dot dot-green"></span> Zelena prerusovana</td><td>Teplota, pri ktere se ventilator vypne</td></tr>
+</table>
+
+<p>
+  Nadpis grafu ukazuje aktualni casovy rozsah dat (napr. &bdquo;poslednich 2h 30min&ldquo;
+  nebo &bdquo;poslednich 24 hodin&ldquo;). Casova osa se automaticky prizpusobi.
+  Graf se aktualizuje kazdych 30 sekund.
+</p>
+
+<div class="warn-box">
+  <div class="box-title">Upozorneni</div>
+  <p>
+    Historie teploty je ulozena v operacni pameti. Po restartu nebo vypnuti
+    zarizeni se historie vymaze a zacne se zaznamenavat znovu.
+  </p>
+</div>
+
+<!-- ======== 9. SYSTEM ======== -->
+<h1 class="page-break">9. Systemovy monitoring</h1>
+
+<p>
+  Karta <strong>System</strong> zobrazuje technicky stav zarizeni v 6 blocich. Hodnoty jsou barevne odliseny:
+</p>
+
+<table>
+  <tr><th>Barva</th><th>Vyznam</th></tr>
+  <tr><td><span class="color-dot dot-green"></span> Zelena</td><td>Vse v poradku</td></tr>
+  <tr><td><span class="color-dot dot-yellow"></span> Zluta</td><td>Upozorneni &ndash; sledujte vyvoj</td></tr>
+  <tr><td><span class="color-dot dot-red"></span> Cervena</td><td>Problem &ndash; zvazit restart zarizeni</td></tr>
+</table>
+
+<h2>Popis sledovanych udaju</h2>
+
+<table>
+  <tr><th>Udaj</th><th>Popis</th><th style="white-space:nowrap">Zdrava hodnota</th></tr>
+  <tr>
+    <td><strong>Teplota CPU</strong></td>
+    <td>Teplota procesoru merena termistorem</td>
+    <td>pod 60 &deg;C</td>
+  </tr>
+  <tr>
+    <td><strong>Volna RAM</strong></td>
+    <td>Aktualne dostupna operacni pamet</td>
+    <td>nad 15 KB</td>
+  </tr>
+  <tr>
+    <td><strong>Min RAM</strong></td>
+    <td>Nejnizsi hodnota volne pameti od zapnuti</td>
+    <td>nad 10 KB</td>
+  </tr>
+  <tr>
+    <td><strong>Fragmentace</strong></td>
+    <td>Mira roztrisenosti pameti</td>
+    <td>pod 30 %</td>
+  </tr>
+  <tr>
+    <td><strong>WiFi signal</strong></td>
+    <td>Sila bezdratoveho signalu</td>
+    <td>nad -60 dBm</td>
+  </tr>
+  <tr>
+    <td><strong>CPU frekvence</strong></td>
+    <td>Aktualni taktovaci frekvence procesoru</td>
+    <td>80 nebo 160 MHz</td>
+  </tr>
+</table>
+
+<div class="info-box">
+  <div class="box-title">Kdy restartovat zarizeni?</div>
+  <p>
+    Pokud <strong>Min RAM</strong> klesne pod 5 KB (cervena) nebo <strong>Fragmentace</strong>
+    presahne 50 % (cervena), doporucujeme zarizeni restartovat odpojenim a opetovnym
+    pripojenim napajeni. Sledujte take <strong>Teplotu CPU</strong> &ndash; nad 75 &deg;C
+    se zobrazi cervenym. Pri beznem provozu by k problemum nemelo dochazet.
+  </p>
+</div>
+
+<!-- ======== 10. RESENI PROBLEMU ======== -->
+<h1 class="page-break">10. Reseni problemu</h1>
+
+<table>
+  <tr><th style="width:35%">Problem</th><th>Reseni</th></tr>
+  <tr>
+    <td><strong>Zarizeni se nepripoji k WiFi</strong></td>
+    <td>
+      Zarizeni se automaticky pokusi o znovupripojeni pri vypadku WiFi.
+      Pokud se nepripoji delsi dobu, odpojte a znovu pripojte napajeni.
+      Pockejte az se objevi WiFi sit <strong>ESP_Config</strong> a nastavte pripojeni znovu.
+      Sit se zobrazi do 3 minut.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Webova stranka neni dostupna</strong></td>
+    <td>
+      Overete, ze jste pripojeni ke stejne WiFi siti. Zkuste zadat IP adresu
+      misto <em>ventilator.local</em>. Pokud stranka nefunguje, restartujte zarizeni.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Teplota ukazuje ERR</strong></td>
+    <td>
+      Teplotni cidlo neni spravne pripojeno nebo je poskozenene.
+      Zkontrolujte, ze je pripojeny <strong>4.7k pull-up rezistor</strong> mezi datovym pinem a 5V
+      &ndash; bez nej cidlo nefunguje spolehlive.
+      Zarizeni se automaticky pokusi cidlo reinicializovat po 5 po sobe jdoucich chybach.
+      Pokud problem pretrva, kontaktujte podporu SOB electronic.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Ventilator nereaguje na web</strong></td>
+    <td>
+      Zkontrolujte, zda neni aktivni rucni rezim (cerveny banner na webu).
+      V automatickem rezimu nelze ventilator ovladat rucne &ndash;
+      prepnete na manualni rezim.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Ventilator se neustale zapina a vypina</strong></td>
+    <td>
+      Zvyste rozdil mezi prahem zapnuti a vypnuti (napr. zapnuti 28 &deg;C,
+      vypnuti 24 &deg;C). Viz kapitola 7.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Zarizeni se samo restartuje</strong></td>
+    <td>
+      Zkontrolujte napajeni &ndash; pouzijte kvalitni USB zdroj (min. 1A).
+      Na systemove karte sledujte teplotu CPU a stav pameti.
+      Pokud problem pretrva, kontaktujte podporu.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Zapomneli jste heslo k WiFi</strong></td>
+    <td>
+      Kontaktujte podporu SOB electronic pro reset WiFi nastaveni.
+    </td>
+  </tr>
+</table>
+
+<!-- ======== 11. SPECIFIKACE ======== -->
+<h1>11. Technicka specifikace</h1>
+
+<table>
+  <tr><th style="width:40%">Parametr</th><th>Hodnota</th></tr>
+  <tr><td>Napajeni</td><td>5 V / micro USB (min. 1A)</td></tr>
+  <tr><td>Rozsah mereni teploty</td><td>-55 az +125 &deg;C</td></tr>
+  <tr><td>Presnost mereni</td><td>&plusmn; 0.5 &deg;C</td></tr>
+  <tr><td>Pripojeni</td><td>WiFi 802.11 b/g/n (2.4 GHz)</td></tr>
+  <tr><td>Webove rozhrani</td><td>http://ventilator.local (port 80)</td></tr>
+  <tr><td>Interval mereni</td><td>2 sekundy</td></tr>
+  <tr><td>Interval zaznamu grafu</td><td>2 minuty</td></tr>
+  <tr><td>Kapacita grafu</td><td>24 hodin (720 zaznamu)</td></tr>
+  <tr><td>Ulozeni nastaveni</td><td>Trvale (EEPROM &ndash; prezije restart)</td></tr>
+  <tr><td>Ulozeni historie</td><td>Docasne (RAM &ndash; vymaze se pri restartu)</td></tr>
+  <tr><td>Mereni teploty CPU</td><td>NTC termistor 10k (pin A0)</td></tr>
+  <tr><td>Frekvence CPU</td><td>80 / 160 MHz (zobrazeno na webu)</td></tr>
+  <tr><td>Provozni teplota zarizeni</td><td>0 az +50 &deg;C</td></tr>
+</table>
+
+<!-- ======== 12. PODPORA ======== -->
+<h1>12. Podpora</h1>
+
+<p>
+  V pripade dotazu, problemu nebo pozadavku na servis kontaktujte:
+</p>
+
+<table>
+  <tr><td><strong>Vyrobce</strong></td><td>SOB electronic</td></tr>
+  <tr><td><strong>E-mail</strong></td><td>sob_electronic@seznam.cz</td></tr>
+  <tr><td><strong>Telefon</strong></td><td>*** *** ***</td></tr>
+</table>
+
+<div class="info-box">
+  <div class="box-title">Pri kontaktovani podpory pripravte</div>
+  <ul>
+    <li>Popis problemu</li>
+    <li>Screenshot systemove karty z weboveho rozhrani (pokud je dostupne)</li>
+    <li>Jak dlouho zarizeni bezi (udaj Uptime v paticce)</li>
+  </ul>
+</div>
+
+<div class="doc-footer">
+  Ventilator PRO &ndash; Uzivatelsky manual v1.1 &bull; &copy; 2026 SOB electronic
+</div>
+
+</body>
+</html>
