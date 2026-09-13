@@ -111,5 +111,6 @@ jobs:
             release/firmware.bin \
             release/firmware.json \
             release/firmware.bin.sha256 \
+            --repo "${{ github.repository }}" \
             --title "${GITHUB_REF_NAME}" \
             --generate-notes
