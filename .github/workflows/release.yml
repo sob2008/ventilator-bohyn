@@ -46,7 +46,7 @@ jobs:
 
       - name: Install libraries
         run: |
-          arduino-cli lib install "ArduinoJson" "WiFiManager"
+          arduino-cli lib install "ArduinoJson" "WiFiManager" "NTPClient" "OneWire" "DallasTemperature"
 
       - name: Read FIRMWARE_VERSION / FIRMWARE_TARGET from OtaConfig.h
         id: fw
