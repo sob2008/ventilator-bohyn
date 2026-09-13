@@ -15,6 +15,10 @@
 #include <DallasTemperature.h>
 #include <EEPROM.h>
 
+#include "OtaConfig.h"
+#include "OtaState.h"
+#include "OtaManager.h"
+
 // Piny
 #define RELAY_PIN       D1  // GPIO5  - rele
 #define MODE_SWITCH_PIN D2  // GPIO4  - prepinac rucniho rezimu
@@ -642,6 +646,15 @@ void handleApiHistory() {
   server.sendContent("");  // ukonci chunked prenos
 }
 
+// ---------- OTA ----------
+
+void otaStatusCallback(const String& line1, const String& line2) {
+  Serial.print("[OTA-STATUS] ");
+  Serial.print(line1);
+  Serial.print(" ");
+  Serial.println(line2);
+}
+
 // ---------- Setup ----------
 
 void setup() {
@@ -653,6 +666,12 @@ void setup() {
 
   // EEPROM
   eepromLoadSettings();
+
+  // OTA stav (LittleFS) + pripadny rollback z minuleho OTA cyklu -
+  // PRED pripojenim WiFi, aby rollback nezavisel na siti.
+  OtaState::begin();
+  OtaManager::setStatusCallback(otaStatusCallback);
+  OtaManager::begin();
 
   // WiFi
   WiFiManager wifiManager;
@@ -710,6 +729,10 @@ void setup() {
   Serial.println("HTTP server spusten");
 
   minFreeHeap = ESP.getFreeHeap();
+
+  // Potvrdit, ze firmware po WiFi pripojeni a startu serveru funguje -
+  // jinak by po par neuspesnych bootech dosel k automatickemu rollbacku.
+  OtaManager::notifyApplicationHealthy();
 }
 
 // ---------- Loop ----------
@@ -718,6 +741,13 @@ void loop() {
   server.handleClient();
   MDNS.update();
   timeClient.update();
+
+  // OTA - neblokujici mimo aktivni kontrolu/update cyklus (viz
+  // OTA_CHECK_INTERVAL_MS v OtaConfig.h). Pri stahovani/flashovani nove
+  // verze tato funkce na chvili zablokuje loop() - rele mezitim zustava
+  // v aktualnim stavu (nemeni se), takze to neni nebezpecne, jen se po
+  // tu dobu neaktualizuje teplota a prepinace nezareaguji.
+  OtaManager::handle();
 
   // Prepinace - kazdy pruchod
   readSwitches();
